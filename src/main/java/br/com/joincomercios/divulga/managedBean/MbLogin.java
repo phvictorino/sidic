@@ -36,10 +36,10 @@ public class MbLogin implements Serializable {
 			if (senha != null && !senha.isEmpty()) {
 				setUsuario(daoUsuario.fazerLogin(login, senha));
 
-				if (usuario.getCodigo() != null)
+				if (usuario != null)
 					return "privado/listaComercios.xhtml";
 				else {
-					UtilsFaces.showErrorDialog("Usuário ou senha inválidos.");
+					UtilsFaces.adicionarMsgErro("Usuário ou senha inválidos.");
 					return null;
 				}
 

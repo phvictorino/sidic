@@ -1,5 +1,6 @@
 package br.com.joincomercios.divulga.dao;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.joincomercios.divulga.entidade.EnUsuario;
@@ -16,6 +17,8 @@ public class DaoUsuario extends GenericDAO<EnUsuario> {
 
 		try {
 			return (EnUsuario) query.getSingleResult();
+		} catch (NoResultException n) {
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
