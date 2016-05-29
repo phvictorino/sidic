@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>SysDistri - <ui:insert name="title" /></title>
+
+	<h:outputStylesheet library="styles" name="layout.css" />
+	<h:outputStylesheet library="styles" name="custom.css" />
+
+	<h:outputScript target="body" library="primefaces"
+		name="jquery/jquery.js" />
+	<h:outputScript target="body" library="javascripts" name="app.js" />
+</h:head>
+<h:body>
+
+
+	<header class="sys-topbar">
+		<h:graphicImage library="images" name="vector.png" />
+		<div class="sys-topbar-text">JoinComercios</div>
+		<a href="#" class="sys-toggle js-toggle"><i class="fa fa-bars"></i></a>
+	</header>
+
+	<aside class="sys-sidebar js-sidebar">
+		<nav class="sys-menu">
+			<ul>
+				<li><h:link outcome="/index.xhtml">
+						<i class="fa  fa-fw  fa-home"></i>Dashboard</h:link></li>
+				<li class="is-selected"><h:link>
+						<i class="fa  fa-fw  fa-user"></i>Vendedores</h:link></li>
+				<li><h:link>
+						<i class="fa  fa-fw  fa-file-text"></i>Contas à receber</h:link></li>
+				<li><h:link>
+						<i class="fa  fa-fw  fa-cog"></i>Configurações</h:link></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<section class="sys-content js-content">
+		<h2>
+			<ui:insert name="title" />
+		</h2>
+		<h:form id="fPadrao">
+			<p:messages id="mensagens" autoUpdate="true" globalOnly="true"
+				showDetail="true" />
+			<ui:insert name="content" />
+		</h:form>
+	</section>
+</h:body>
+</html>
