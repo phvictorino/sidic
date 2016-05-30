@@ -1,4 +1,4 @@
-# sidic
+# SIDiC - JoinComercios - Divulga
 
 Esse projeto é referente ao trabalho semestral, proposto pela Professora Ana Karina.
 
