@@ -1,0 +1,115 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Lista de Comércios</ui:define>
+
+	<ui:define name="content">
+
+		<div class="ui-fluid ui-grid ui-grid-responsive">
+			<p:outputPanel id="panelFiltros">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-3">
+						<p:outputLabel for="nome" value="Nome" style="display: block" />
+						<p:inputText id="nome"
+							value="#{mbComercio.comercioParaBusca.nome}" style="width: 90%" />
+					</div>
+
+					<div class="ui-grid-col-3">
+						<p:outputLabel for="endereco" value="Endereço"
+							style="display: block" />
+						<p:inputText id="endereco"
+							value="#{mbComercio.comercioParaBusca.endereco}"
+							style="width: 90%" />
+					</div>
+
+					<div class="ui-grid-col-3">
+						<p:outputLabel for="telefone" value="Telefone"
+							style="display: block" />
+						<p:inputText id="telefone"
+							value="#{mbComercio.comercioParaBusca.telefone}"
+							style="width: 90%" />
+					</div>
+
+					<div class="ui-grid-col-3">
+						<p:outputLabel for="cnpj" value="CNPJ" style="display: block" />
+						<p:inputText id="cnpj"
+							value="#{mbComercio.comercioParaBusca.cnpj}" style="width: 90%" />
+					</div>
+				</div>
+			</p:outputPanel>
+
+			<div class="ui-grid-col-12">
+				<p:commandButton value="Buscar"
+					action="#{mbComercio.aplicarFiltros()}"
+					process="@this panelFiltros" update="tableComercios"
+					style="margin-top: 10px; width: auto; right:40px; float:right;" />
+			</div>
+		</div>
+
+		<p:separator style="margin: 30px 0" />
+
+		<p:dataTable id="tableComercios" widgetVar="tableComercios"
+			value="#{mbComercio.listaComercios}" var="c" reflow="true"
+			emptyMessage="Nenhum comércio encontrado." style="text-align: center">
+
+			<f:facet name="header">
+				Comércios
+			</f:facet>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{c.nome}" />
+			</p:column>
+
+			<p:column headerText="Telefone">
+				<h:outputText value="#{c.telefone}">
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Horário de Funcionamento">
+				<h:outputText value="#{c.horarioFuncionamento}" />
+			</p:column>
+
+			<p:column width="100">
+				<p:commandButton icon="fa fa-info"
+					action="#{mbComercio.abrirInfo(c)}" process="@this @form"
+					update="@form" />
+			</p:column>
+
+		</p:dataTable>
+
+		<p:dialog id="dialogInfo" widgetVar="dialogInfo" resizable="false"
+			header="Informação: #{mbComercio.comercioInfo.nome}"
+			responsive="true" minimizable="false" maximizable="false">
+
+			<p:panelGrid layout="grid" columns="2"
+				columnClasses="ui-grid-col-5, ui-grid-col-7"
+				styleClass="ui-panelgrid-blank">
+
+				<h:outputText value="CNPJ: " />
+				<h:outputText value="#{mbComercio.comercioInfo.cnpj}" />
+
+				<h:outputText value="Telefone: " />
+				<h:outputText value="#{mbComercio.comercioInfo.telefone}" />
+
+				<h:outputText value="Endereço " />
+				<h:outputText value="#{mbComercio.comercioInfo.endereco}" />
+
+				<h:outputText value="Horário de funcionamento: " />
+				<h:outputText
+					value="#{mbComercio.comercioInfo.horarioFuncionamento}" />
+
+				<h:outputText value="Usuário de cadastro: " />
+				<h:outputText value="#{mbComercio.comercioInfo.usuario.nome}" />
+
+
+			</p:panelGrid>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,54 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Formulário de Comércio</ui:define>
+
+	<ui:define name="content">
+
+		<p:toolbar>
+			<f:facet name="right">
+				<p:commandButton value="Novo"
+					action="form.xhtml?faces-redirect=true" />
+			</f:facet>
+		</p:toolbar>
+
+		<p:dataTable id="tableComercios" widgetVar="tableComercios"
+			value="#{mbComercioGerencia.listaComercios}" var="c" reflow="true"
+			emptyMessage="Nenhum comércio encontrado." style="text-align: center">
+
+			<f:facet name="header">
+				Seus comércios
+			</f:facet>
+
+			<p:column headerText="ID" width="100">
+				<h:outputText value="#{c.codigo}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{c.nome}" />
+			</p:column>
+
+			<p:column headerText="Telefone">
+				<h:outputText value="#{c.telefone}">
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Horário de Funcionamento">
+				<h:outputText value="#{c.horarioFuncionamento}" />
+			</p:column>
+
+			<p:column width="100">
+				<p:commandButton icon="fa fa-edit"
+					action="#{mbComercioGerencia.editar(c)}" />
+			</p:column>
+
+		</p:dataTable>
+
+
+	</ui:define>
+
+</ui:composition>

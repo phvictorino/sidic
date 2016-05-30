@@ -3,8 +3,7 @@ package br.com.joincomercios.divulga.managedBean;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Produces;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +12,7 @@ import br.com.joincomercios.divulga.entidade.EnUsuario;
 import br.com.joincomercios.divulga.utils.UtilsFaces;
 
 @Named
-@SessionScoped
+@ViewScoped
 public class MbLogin implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,6 +27,20 @@ public class MbLogin implements Serializable {
 	@PostConstruct
 	public void init() {
 
+		if (UtilsFaces.getSessionMapValue("usuarioLogado") == null) {
+			redirecionaLogin();
+		} else {
+			redirecionaLista();
+		}
+
+	}
+
+	public String redirecionaLogin() {
+		return "login.xhtml?faces-redirect=true";
+	}
+
+	public String redirecionaLista() {
+		return "/comercio/listaGerencia.xhtml?faces-redirect=true";
 	}
 
 	public String fazerLogin() {
@@ -35,22 +48,21 @@ public class MbLogin implements Serializable {
 		if (login != null && !login.isEmpty()) {
 			if (senha != null && !senha.isEmpty()) {
 				setUsuario(daoUsuario.fazerLogin(login, senha));
-
-				if (usuario != null)
-					return "privado/listaComercios.xhtml";
-				else {
+				if (usuario != null) {
+					UtilsFaces.adicionarMsgInfo("Logado com sucesso.");
+					UtilsFaces.setSessionMapValue("usuarioLogado", usuario);
+					return "/privado/comercio/listaGerencia.xhtml?faces-redirect=true";
+				} else {
 					UtilsFaces.adicionarMsgErro("Usuário ou senha inválidos.");
-					return null;
 				}
 
 			} else {
 				UtilsFaces.showErrorDialog("Senha não informada.");
-				return null;
 			}
 		} else {
 			UtilsFaces.showErrorDialog("Login não informado.");
-			return null;
 		}
+		return null;
 
 	}
 
@@ -58,8 +70,6 @@ public class MbLogin implements Serializable {
 		return usuario;
 	}
 
-	@Produces
-	@Named("usuarioLogado")
 	public void setUsuario(EnUsuario usuario) {
 		this.usuario = usuario;
 	}

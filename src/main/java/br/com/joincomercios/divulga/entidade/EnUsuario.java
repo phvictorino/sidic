@@ -1,9 +1,14 @@
 package br.com.joincomercios.divulga.entidade;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +21,9 @@ public class EnUsuario {
 	private String nome;
 	private String login;
 	private String senha;
+
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+	private List<EnComercio> listaComercios;
 
 	@Override
 	public boolean equals(Object obj) {
@@ -72,5 +80,14 @@ public class EnUsuario {
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
+	}
+
+	public List<EnComercio> getListaComercios() {
+		Collections.sort(listaComercios);
+		return listaComercios;
+	}
+
+	public void setListaComercios(List<EnComercio> listaComercios) {
+		this.listaComercios = listaComercios;
 	}
 }

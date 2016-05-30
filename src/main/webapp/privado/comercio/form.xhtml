@@ -1,0 +1,39 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">Formulário de Comércio</ui:define>
+
+	<ui:define name="content">
+
+		<p:panelGrid columns="2" columnClasses="ui-grid-col-1, ui-grid-col-3"
+			layout="grid" styleClass="ui-panelgrid-blank">
+
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" value="#{mbComercioGerencia.comercio.nome}" />
+
+			<p:outputLabel for="cnpj" value="CNPJ" />
+			<p:inputMask id="cnpj" value="#{mbComercioGerencia.comercio.cnpj}"
+				mask="99.999.999/9999-99" />
+
+			<p:outputLabel for="endereco" value="Endereço" />
+			<p:inputText id="endereco" value="#{mbComercioGerencia.comercio.endereco}" />
+
+			<p:outputLabel for="telefone" value="Telefone" />
+			<p:inputMask id="telefone" value="#{mbComercioGerencia.comercio.telefone}" mask="(99)9999-9999" />
+
+			<p:outputLabel for="horarioFunc" value="Horário de Funcionamento" />
+			<p:inputMask id="horarioFunc"
+				value="#{mbComercioGerencia.comercio.horarioFuncionamento}" mask="99:99  -  99:99" />
+
+			<p:outputLabel />
+			<p:commandButton value="Salvar" action="#{mbComercioGerencia.salvar()}" />
+
+		</p:panelGrid>
+
+	</ui:define>
+
+</ui:composition>

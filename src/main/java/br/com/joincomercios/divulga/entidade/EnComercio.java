@@ -1,16 +1,16 @@
 package br.com.joincomercios.divulga.entidade;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "comercio")
-public class EnComercio {
+public class EnComercio implements Comparable<EnComercio> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +19,10 @@ public class EnComercio {
 	private String telefone;
 	private String cnpj;
 	private String endereco;
-	private Date horarioFuncionamento;
-	private Boolean ativo;
+	private String horarioFuncionamento;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private EnUsuario usuario;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -62,20 +64,12 @@ public class EnComercio {
 		this.endereco = endereco;
 	}
 
-	public Date getHorarioFuncionamento() {
+	public String getHorarioFuncionamento() {
 		return horarioFuncionamento;
 	}
 
-	public void setHorarioFuncionamento(Date horarioFuncionamento) {
+	public void setHorarioFuncionamento(String horarioFuncionamento) {
 		this.horarioFuncionamento = horarioFuncionamento;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override
@@ -101,6 +95,24 @@ public class EnComercio {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	public EnUsuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(EnUsuario usuario) {
+		this.usuario = usuario;
+	}
+
+	@Override
+	public int compareTo(EnComercio o) {
+		if (this.codigo.compareTo(o.getCodigo()) > 0) {
+			return 1;
+		} else if (this.codigo.compareTo(o.getCodigo()) < 0) {
+			return -1;
+		}
+		return 0;
 	}
 
 }
