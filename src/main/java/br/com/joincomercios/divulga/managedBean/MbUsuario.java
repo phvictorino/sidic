@@ -33,8 +33,7 @@ public class MbUsuario implements Serializable {
 			usuario = new EnUsuario();
 			listaUsuarios = daoUsuario.listarTodos();
 		} else {
-			UtilsFaces.adicionarMsgErroFatal("Você não tem permissão para gerenciar usuários.");
-			UtilsFaces.redirecionar("");
+			UtilsFaces.redirecionar("comercio/lista.xhtml");
 		}
 	}
 
@@ -51,7 +50,6 @@ public class MbUsuario implements Serializable {
 				}
 			}
 		}
-
 		return null;
 	}
 

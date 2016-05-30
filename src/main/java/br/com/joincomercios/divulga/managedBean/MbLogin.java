@@ -43,6 +43,11 @@ public class MbLogin implements Serializable {
 		return "/comercio/listaGerencia.xhtml?faces-redirect=true";
 	}
 
+	public void deslogar() {
+		UtilsFaces.removeSessionMapValue("usuarioLogado");
+		UtilsFaces.redirecionar("comercio/lista.xhtml");
+	}
+
 	public String fazerLogin() {
 
 		if (login != null && !login.isEmpty()) {

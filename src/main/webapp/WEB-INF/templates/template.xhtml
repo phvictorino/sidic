@@ -13,7 +13,8 @@
 	<h:outputScript target="body" library="primefaces"
 		name="jquery/jquery.js" />
 	<h:outputScript target="body" library="javascripts" name="app.js" />
-	<link rel="shortcut icon" href="#{resource['images/comercio.png']}" type="image/x-icon" />
+	<link rel="shortcut icon" href="#{resource['images/comercio.png']}"
+		type="image/x-icon" />
 </h:head>
 <h:body>
 
@@ -22,6 +23,8 @@
 		<h:graphicImage library="images" name="comercio.png" />
 		<div class="sys-topbar-text">JoinComercios</div>
 		<a href="#" class="sys-toggle js-toggle"><i class="fa fa-bars"></i></a>
+		<p:commandButton value="Deslogar"
+			style="float: right; margin: 10px 10px 0 0;" action="#{mbLogin.deslogar()}" />
 	</header>
 
 	<aside class="sys-sidebar js-sidebar">
@@ -33,8 +36,8 @@
 				<!-- 						<i class="fa  fa-fw  fa-user"></i>Usuários</h:link></li> -->
 				<li><h:link outcome="/privado/login.xhtml">
 						<i class="fa  fa-fw  fa-cog"></i>Área Restrita</h:link></li>
-
-
+				<li><h:link outcome="/privado/usuario/lista.xhtml">
+						<i class="fa  fa-fw  fa-user"></i>Usuários</h:link></li>
 			</ul>
 		</nav>
 	</aside>
