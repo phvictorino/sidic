@@ -13,3 +13,4 @@ Hibernate
 JSF
 CDI
 PrimeFaces
+PostgresSQL
