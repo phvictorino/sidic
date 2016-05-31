@@ -5,7 +5,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="title">Formulário de Comércio</ui:define>
+	<ui:define name="title">Lista de Comércio por Usuário</ui:define>
 
 	<ui:define name="content">
 
@@ -44,6 +44,8 @@
 			<p:column width="100">
 				<p:commandButton icon="fa fa-edit"
 					action="#{mbComercioGerencia.editar(c)}" />
+				<p:commandButton icon="fa fa-trash" ajax="false"
+					action="#{mbComercioGerencia.excluir(c)}" />
 			</p:column>
 
 		</p:dataTable>

@@ -33,6 +33,11 @@
 				<h:outputText value="#{u.login}" />
 			</p:column>
 
+			<p:column width="100">
+				<p:commandButton icon="fa fa-edit" action="#{mbUsuario.editar(u)}"
+					ajax="false" />
+			</p:column>
+
 		</p:dataTable>
 
 	</ui:define>

@@ -30,7 +30,15 @@ public class MbUsuario implements Serializable {
 		usuarioLogado = (EnUsuario) UtilsFaces.getSessionMapValue("usuarioLogado");
 
 		if (usuarioLogado != null && usuarioLogado.getLogin().equals("pedro")) {
-			usuario = new EnUsuario();
+
+			EnUsuario usuarioEditar = (EnUsuario) UtilsFaces.getSessionMapValue("usuarioEditar");
+
+			if (usuarioEditar != null) {
+				usuario = usuarioEditar;
+			} else {
+				usuario = new EnUsuario();
+			}
+
 			listaUsuarios = daoUsuario.listarTodos();
 		} else {
 			UtilsFaces.redirecionar("comercio/lista.xhtml");
@@ -51,6 +59,11 @@ public class MbUsuario implements Serializable {
 			}
 		}
 		return null;
+	}
+
+	public String editar(EnUsuario usuario) {
+		UtilsFaces.setSessionMapValue("usuarioEditar", usuario);
+		return "form.xhtml?faces-redirect=true";
 	}
 
 	private boolean validaUsuario() {

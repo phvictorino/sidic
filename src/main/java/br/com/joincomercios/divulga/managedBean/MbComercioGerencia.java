@@ -75,6 +75,12 @@ public class MbComercioGerencia implements Serializable {
 		return null;
 	}
 
+	public String excluir(EnComercio comercio) {
+		daoComercio.remover(comercio);
+		UtilsFaces.adicionarMsgInfo("Comércio removido com sucesso!");
+		return "listaGerencia.xhtml";
+	}
+
 	private boolean validaParaSalvar() {
 		if (comercio.getCnpj() == null || comercio.getCnpj().isEmpty()) {
 			UtilsFaces.adicionarMsgErro("CNPJ não preenchido.");
